@@ -61,13 +61,6 @@ const register = async (req, res, next) => {
         message: "The email is taken",
       };
     }
-    const existedUsername = await User.findOne({ username });
-    if (existedUsername) {
-      throw {
-        status: 400,
-        message: "The username is taken",
-      };
-    }
     const saltRounds = 10;
     const passwordHash = await bcrypt.hash(password, saltRounds);
 

@@ -44,19 +44,6 @@ app.use(bodyParser.json());
 app.use(middleware.requestLogger);
 app.use(middleware.tokenExtractor);
 
-/**
- * @swagger
- * /api/community:
- *  get:
- *    description: Use to request all communities
- *    responses:
- *      '200':
- *        description: A successful response
- */
-app.get("/api/ping", (_req, res) => {
-  res.send("pong");
-});
-
 app.use("/api", router);
 
 //Static folder

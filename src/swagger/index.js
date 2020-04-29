@@ -14,8 +14,8 @@ const swaggerOptions = {
       servers: [`http://localhost:${config.PORT}`],
     },
   },
-  // apis: ["./controllers/*.js"],
-  apis: ["./app.js"],
+  apis: ["./src/controllers/*.js"],
+  // apis: ["./src//app.js"],
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
