@@ -31,3 +31,11 @@ This repo supports to run the project in a container with Docker. Just run the f
 $ docker-compose build
 $ docker-compose up -d
 ```
+
+**Locally Running**
+
+Swagger Documentation
+
+```
+http://localhost:3001/api-docs/
+```
