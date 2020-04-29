@@ -1,7 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const ObjectId = require("mongodb").ObjectId;
 const { validationResult } = require("express-validator");
 
 const login = async (req, res, next) => {
@@ -9,7 +8,10 @@ const login = async (req, res, next) => {
   // static id of user
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ error: errors.array() });
+    throw {
+      status: 400,
+      message: "There were validation errors",
+    };
   }
   const { email, password } = req.body;
   try {

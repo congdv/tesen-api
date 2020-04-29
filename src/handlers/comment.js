@@ -1,4 +1,5 @@
 const Comment = require("../models/comment");
+const { validationResult } = require("express-validator");
 
 const getAllComments = async (req, res, next) => {
   try {
@@ -14,6 +15,14 @@ const getAllComments = async (req, res, next) => {
 
 const addComment = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      throw {
+        status: 400,
+        message: "There were validation errors",
+      };
+    }
+
     const currentUser = req.currentUser;
     const communityId = req.params.id;
     const toAddComment = new Comment({

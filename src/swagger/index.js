@@ -13,7 +13,16 @@ const swaggerOptions = {
       },
       servers: [`http://localhost:${config.PORT}`],
     },
+    securityDefinitions: {
+      bearerAuth: {
+        type: "apiKey",
+        name: "Authorization",
+        scheme: "bearer",
+        in: "header",
+      },
+    },
   },
+
   apis: ["./src/controllers/*.js"],
   // apis: ["./src//app.js"],
 };

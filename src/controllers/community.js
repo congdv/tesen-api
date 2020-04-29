@@ -1,6 +1,8 @@
 const express = require("express");
 const communityHandler = require("../handlers/community");
 const router = express.Router();
+const { check } = require("express-validator");
+const { authenticationUser } = require("../utils/middleware");
 
 /**
  * @swagger
@@ -71,6 +73,8 @@ router.get("/:id", communityHandler.getCommunity);
  * /api/community:
  *  post:
  *    description: Create new community
+ *    security:
+ *      - bearerAuth: []
  *    parameters:
  *      - name: Community
  *        in: body
@@ -80,16 +84,29 @@ router.get("/:id", communityHandler.getCommunity);
  *    responses:
  *      '200':
  *        description: A successful added new community
+ *      '401':
+ *        description: Access token is missing or invalid
  *    tags:
  *      - Community
  */
-router.post("/", communityHandler.addCommunity);
+router.post(
+  "/",
+  check("pictureCover").not().isEmpty().trim(),
+  check("avatar").not().isEmpty().trim(),
+  check("name").not().isEmpty().trim(),
+  check("isCloseCommunity").not().isEmpty().trim(),
+  check("city").not().isEmpty().trim(),
+  authenticationUser,
+  communityHandler.addCommunity
+);
 
 /**
  * @swagger
  * /api/community/{id}:
  *  put:
  *    description: Update a specific community
+ *    security:
+ *      - bearerAuth: []
  *    parameters:
  *      - name: id
  *        in: path
@@ -104,13 +121,15 @@ router.post("/", communityHandler.addCommunity);
  *    tags:
  *      - Community
  */
-router.put("/:id", communityHandler.updateCommunity);
+router.put("/:id", authenticationUser, communityHandler.updateCommunity);
 
 /**
  * @swagger
  * /api/community/{id}:
  *  delete:
  *    description: Delete a specific community
+ *    security:
+ *      - bearerAuth: []
  *    parameters:
  *      - name: id
  *        in: path
@@ -125,6 +144,6 @@ router.put("/:id", communityHandler.updateCommunity);
  *    tags:
  *      - Community
  */
-router.delete("/:id", communityHandler.deleteCommunity);
+router.delete("/:id", authenticationUser, communityHandler.deleteCommunity);
 
 module.exports = router;

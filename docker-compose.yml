@@ -1,7 +1,7 @@
 version: "2"
 services:
   app:
-    container_name: node-app
+    container_name: tesen_app
     restart: always
     build: .
     environment:

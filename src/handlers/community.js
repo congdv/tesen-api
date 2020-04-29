@@ -33,6 +33,14 @@ const getAllCommunities = async (req, res, next) => {
 
 const addCommunity = async (req, res, next) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      throw {
+        status: 400,
+        message: "There were validation errors",
+      };
+    }
+
     const communityToAdd = new Community({
       ...req.body,
     });

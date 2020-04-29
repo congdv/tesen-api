@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const userHandler = require("../handlers/user");
 const { check } = require("express-validator");
-const { authenticationUser } = require("../utils/middleware");
 
 /**
  * @swagger
@@ -48,6 +47,8 @@ const { authenticationUser } = require("../utils/middleware");
  *    responses:
  *      '200':
  *        description: A successful added new community
+ *      '401':
+ *        description: Wrong username or password
  *    tags:
  *      - User
  */

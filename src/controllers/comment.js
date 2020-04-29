@@ -2,6 +2,7 @@ const express = require("express");
 const commentHandler = require("../handlers/comment");
 const router = express.Router();
 const { authenticationUser } = require("../utils/middleware");
+const { check } = require("express-validator");
 
 /**
  * @swagger
@@ -50,6 +51,8 @@ router.get("/:id", commentHandler.getAllComments);
  * /api/comment/{id}:
  *  post:
  *    description: Create new comment
+ *    security:
+ *      - bearerAuth: []
  *    parameters:
  *      - name: Comment
  *        in: body
@@ -69,6 +72,11 @@ router.get("/:id", commentHandler.getAllComments);
  *    tags:
  *      - Comment
  */
-router.post("/:id", authenticationUser, commentHandler.addComment);
+router.post(
+  "/:id",
+  check("comment").not().isEmpty().trim(),
+  authenticationUser,
+  commentHandler.addComment
+);
 
 module.exports = router;
