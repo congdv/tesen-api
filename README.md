@@ -1,10 +1,6 @@
-# Ecommerce
+# Tensen API
 
 ## Initial Setup
-
-- Download MongoDB from [here](https://www.mongodb.com/download-center/community)
-- After installing MongoDB, you should create environment variable for running application. The environment will include name of database, url of database, port of application, and key for hashing password
-- To create environment variable you can copy the file `.env.sample` to new file, and rename it by `.env`
 
 **For running application:**
 
@@ -12,17 +8,26 @@
 - Install dependencies of the application
 
 ```
-npm install
+$ npm install
 ```
 
 - For development:
 
 ```
-npm run dev
+$ npm run dev
 ```
 
 - For production:
 
 ```
-npm start
+$ npm start
+```
+
+**Running with docker**
+
+This repo supports to run the project in a container with Docker. Just run the following commands.
+
+```
+$ docker-compose build
+$ docker-compose up -d
 ```
